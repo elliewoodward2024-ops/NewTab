@@ -1,49 +1,229 @@
+:root {
+    --background: url(../pics/wp7294211.jpg);
+    --backgroundcol: #171B35;
+    --panel: #090B18;
+    --text: #dae4ff;
+    --accent: #707f96;
+
+}
+
+[data-theme="violet"] {
+    --background: url(../pics/wp7294211.jpg);
+    --backgroundcol: #120d20;
+    --panel: #251936;
+    --text: #e0d4f0;
+    --accent: #705f81;
+}
+
+[data-theme="silver"] {
+    --background: url(../pics/wp7294211.jpg);
+    --backgroundcol: #10141c;
+    --panel: #202938;
+    --text: #dce5f2;
+    --accent: #59697b;
+}
+
+[data-theme="teal"] {
+    --background: url(../pics/wp7294211.jpg);
+    --backgroundcol: #0f2429;
+    --panel: #203738;
+    --text: #dcf2f1;
+    --accent: #59787b;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+section,
+.card {
+    background: var(--panel);
+}
+
+button {
+    color: var(--text);
+    border-color: var(--accent);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    color: var(--text);
+}
+
 .clock {
     margin: 0;
-    height: 75vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     font-size: 100px;
     font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
 
+.date {
+    margin: 10px 0;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .TextCon {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
+    margin: 20px 0;
 }
 
 .searchBar {
-
-
     background-color: #ffffff;
     font-family: 'Times New Roman', Times, serif;
-    color: #000000;
-    border: #000000;
-    transition: all 0.3ms ease;
+    color: var(--text);
+    border: 1px solid var(--accent);
     font-size: 20px;
     border-radius: 50px;
     height: 40px;
     width: 500px;
     padding: 10px 20px;
+    transition: transform 0.3s ease;
 }
 
 .searchBar:focus {
-
-    background-color: #ffffff;
-    font-family: 'Times New Roman', Times, serif;
-    color: #000000;
-    border: #000000;
-    transition: all 0.3ms ease;
-    font-size: 20px;
-    border-radius: 50px;
-    height: 40px;
-    width: 500px;
-    padding: 10px 20px;
+    outline: none;
     transform: scale(1.2);
+}
+
+body {
+
+    background-image: var(--background);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    background-color: var(--backgroundcol);
+    opacity: .5;
+
+}
+
+
+
+
+
+
+
+.window {
+    display: none;
+    position: absolute;
+    top: 500px;
+    left: 890px;
+
+    width: 400px;
+    height: 300px;
+
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--panel);
+    border-radius: 12px;
+
+
+    overflow: auto;
+}
+
+.window-header,
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--accent);
+
+}
+
+.window-header h1,
+.settings-header h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 22px;
+    margin: 0;
+}
+
+.window-header button,
+.settings-header button {
+    background: transparent;
+    color: var(--text);
+    border: none;
+    cursor: pointer;
+}
+
+.window-header button:hover,
+.settings-header button:hover {
+    background: var(--hover);
+}
+
+.window-content {
+    padding: 15px;
+}
+
+.desktop-icon {
+    display: absolute;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font: inherit;
+    width: 80px;
+}
+
+#desktopApps {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 0 !important;
+}
+
+.desktop-icon img {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+
+
+}
+
+.desktop-icon:hover {
+    transform: translateY(-5px);
+    transition: transform 0.1s ease;
+}
+
+button {
+    padding: 10px 16px;
+    background: var(--accent);
+    color: var(--text);
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+
 }
