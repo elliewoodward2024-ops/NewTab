@@ -34,6 +34,26 @@
     --hover: #2d4849;
 }
 
+
+[data-theme="red"] {
+    --background: url("../pics/wp7294211.jpg");
+    --backgroundcol: #3a0000;
+    --panel: #382020;
+    --text: #f2dcee;
+    --accent: #b07d7d;
+    --hover: #492d2d;
+}
+
+[data-theme="brown"] {
+    --background: url("../pics/wp7294211.jpg");
+    --backgroundcol: #231209;
+    --panel: #34251e;
+    --text: #f2e7dc;
+    --accent: #b0947d;
+    --hover: #49392d;
+}
+
+
 * {
     box-sizing: border-box;
 }

@@ -43,10 +43,10 @@ function closeWindow(element) {
 }
 
 
-/* THEME SETTINGS */
+
 
 function changeTheme(theme) {
-    const allowedThemes = ["default", "violet", "silver", "teal"];
+    const allowedThemes = ["default", "violet", "silver", "teal", "red", "brown"];
 
     if (!allowedThemes.includes(theme)) return;
 
@@ -56,6 +56,7 @@ function changeTheme(theme) {
         document.documentElement.setAttribute("data-theme", theme);
     }
 }
+
 
 
 const durationInput = document.querySelector("#duration");
