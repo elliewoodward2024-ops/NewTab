@@ -1,25 +1,32 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NewTab</title>
     <link rel="stylesheet" href="styles/style.css">
     <script src="allJS/main.js" defer></script>
 </head>
 
-
-
-
-
 <body>
-   
+
     <div class="main-container">
         <div class="clock" id="liveClock"></div>
         <div class="date" id="live-date"></div>
-  
-        <form action="https://google.com/search" method="GET" target="_blank" class="TextCon"> 
-            <input id="search" type="text" name="q" class="searchBar" placeholder="Search..." required>
-         </form>
+
+        <form action="https://www.google.com/search"
+              method="GET"
+              target="_blank"
+              class="TextCon">
+
+            <input id="search"
+                   type="text"
+                   name="q"
+                   class="searchBar"
+                   placeholder="Search..."
+                   required>
+        </form>
     </div>
 
 
@@ -27,13 +34,9 @@
     <!-- <section id="focus-timer">
         <h2>Deep Space</h2>
         <label for="duration">Focus duration (minutes)</label>
-        <input id="duration"
-         type="number"
-         min="1"
-         max="180"
-         value="25">
+        <input id="duration" type="number" min="1" max="180" value="25">
 
-        <p id="timer-display">25:00</p> 
+        <p id="timer-display">25:00</p>
         <button id="start-timer">Start</button>
         <button id="pause-timer">Pause</button>
         <button id="reset-timer">Reset</button>
@@ -42,37 +45,71 @@
 
     <main>
 
-
         <div id="settings" class="window">
 
-            <div id="settingsheaders" class="settings-header">
+            <div class="settings-header">
                 <h1>Settings</h1>
 
-                <button type="button" onclick="closeWindow(document.getElementById('settings'))" aria-label="Close setting window">
+                <button type="button"
+                        onclick="closeWindow(document.getElementById('settings'))"
+                        aria-label="Close settings">
                     x
                 </button>
             </div>
 
             <div class="window-content">
-                <p>Here are a list of themes you can choose from:</p>
-                <button onclick="changeTheme('default')">Default</button>
-                <button onclick="changeTheme('violet')">Violet</button>
-                <button onclick="changeTheme('silver')">Moonlight</button>
-                <button onclick="changeTheme('teal')">Emerald</button>
+                <p>Choose a theme:</p>
 
-                <br>
-                
+                <button type="button" onclick="changeTheme('default')">Default</button>
+                <button type="button" onclick="changeTheme('violet')">Violet</button>
+                <button type="button" onclick="changeTheme('silver')">Moonlight</button>
+                <button type="button" onclick="changeTheme('teal')">Emerald</button>
             </div>
         </div>
 
+        <div id="notes" class="window">
+
+            <div class="window-header">
+                <h1>Notes App</h1>
+
+                <button type="button"
+                        onclick="closeWindow(document.getElementById('notes'))"
+                        aria-label="Close notes">
+                    x
+                </button>
+            </div>
+
+            <div class="window-content">
+                <input id="noteTitle" placeholder="Note title...">
+
+                <textarea id="noteContent"
+                          placeholder="Write your note..."></textarea>
+
+                <button type="button" id="saveButton">Save Note</button>
+
+                <h2 class="saved-notes-heading">Saved Notes</h2>
+                <div id="notesList"></div>
+            </div>
+        </div>
 
     </main>
 
+    <div id="desktopApps">
 
-    <div id="desktopApps" style="padding-top: 64px; padding-left: 16px; ">
-            <button class="desktop-icon" onclick="openWindow(document.getElementById('settings'))">
-                <p><span style="font-size: 20px;">⚙︎</span><br>Settings</p>
-            </button>
+        <button class="desktop-icon"
+                type="button"
+                onclick="openWindow(document.getElementById('settings'))">
+            <span class="desktop-symbol">⚙</span>
+            <span>Settings</span>
+        </button>
+
+        <button class="desktop-icon2"
+                type="button"
+                onclick="openWindow(document.getElementById('notes'))">
+            <span class="desktop-symbol notes-symbol">≔</span>
+            <span>Quick Note</span>
+        </button>
+
     </div>
 
 </body>

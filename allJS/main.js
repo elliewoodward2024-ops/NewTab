@@ -1,67 +1,104 @@
 function liveClock() {
+    const target = document.getElementById("liveClock");
+    if (!target) return;
 
-    const target = document.getElementById('liveClock');
-    const now = new Date();
-
-    target.textContent = now.toLocaleTimeString();
+    target.textContent = new Date().toLocaleTimeString("en-AU");
 }
-
-setInterval(liveClock, 1000);
-liveClock();
-
 
 function updateLiveDate() {
-    const now = new Date();
+    const target = document.getElementById("live-date");
+    if (!target) return;
+
     const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
     };
-    const currentDate = now.toLocaleDateString('en-AU', options);
-    document.getElementById('live-date').textContent = currentDate;
+
+    target.textContent = new Date().toLocaleDateString("en-AU", options);
 }
+
+liveClock();
 updateLiveDate();
+
+setInterval(liveClock, 1000);
 setInterval(updateLiveDate, 60000);
 
-const durationInput = document.querySelector("#duration");
-const display = document.querySelector("#timer-display");
 
-let remaining = 25 * 60;
-let interval = null;
-let endTime = null;
+let biggestIndex = 100;
 
-function showTime() {
-    const minutes = Math.floor(remaining / 60);
-    const seconds = remaining % 60;
+function openWindow(element) {
+    if (!element) return;
 
-    display.textContent =
-        `${String(minutes).padStart(2, "0")}:` +
-        `${String(seconds).padStart(2, "0")}`;
+    element.style.display = "block";
+    biggestIndex++;
+    element.style.zIndex = biggestIndex;
 }
 
-function stopTimer() {
-    clearInterval(interval);
-    interval = null;
-    endTime = null;
+function closeWindow(element) {
+    if (!element) return;
+
+    element.style.display = "none";
 }
 
-function tick() {
-    remaining = Math.max(
-        0,
-        Math.ceil((endTime - Date.now()) / 1000)
-    );
 
-    showTime();
+/* THEME SETTINGS */
 
-    if (remaining <= 0) {
-        stopTimer();
-        alert("Focus session complete.");
+function changeTheme(theme) {
+    const allowedThemes = ["default", "violet", "silver", "teal"];
+
+    if (!allowedThemes.includes(theme)) return;
+
+    if (theme === "default") {
+        document.documentElement.removeAttribute("data-theme");
+    } else {
+        document.documentElement.setAttribute("data-theme", theme);
     }
 }
 
-document.querySelector("#start-timer")
-    .addEventListener("click", () => {
+
+const durationInput = document.querySelector("#duration");
+const display = document.querySelector("#timer-display");
+const startButton = document.querySelector("#start-timer");
+const pauseButton = document.querySelector("#pause-timer");
+const resetButton = document.querySelector("#reset-timer");
+
+if (durationInput && display && startButton && pauseButton && resetButton) {
+    let remaining = 25 * 60;
+    let interval = null;
+    let endTime = null;
+
+    function showTime() {
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+
+        display.textContent =
+            `${String(minutes).padStart(2, "0")}:` +
+            `${String(seconds).padStart(2, "0")}`;
+    }
+
+    function stopTimer() {
+        clearInterval(interval);
+        interval = null;
+        endTime = null;
+    }
+
+    function tick() {
+        remaining = Math.max(
+            0,
+            Math.ceil((endTime - Date.now()) / 1000)
+        );
+
+        showTime();
+
+        if (remaining <= 0) {
+            stopTimer();
+            alert("Focus session complete.");
+        }
+    }
+
+    startButton.addEventListener("click", () => {
         if (interval !== null || remaining <= 0) return;
 
         endTime = Date.now() + remaining * 1000;
@@ -69,21 +106,19 @@ document.querySelector("#start-timer")
         tick();
     });
 
-document.querySelector("#pause-timer")
-    .addEventListener("click", () => {
+    pauseButton.addEventListener("click", () => {
         if (interval === null) return;
 
         tick();
         stopTimer();
     });
 
-document.querySelector("#reset-timer")
-    .addEventListener("click", () => {
+    resetButton.addEventListener("click", () => {
         stopTimer();
 
         const minutes = Number(durationInput.value);
-        if (!Number.isFinite(minutes) ||
-            minutes < 1 || minutes > 180) {
+
+        if (!Number.isFinite(minutes) || minutes < 1 || minutes > 180) {
             durationInput.value = "25";
         }
 
@@ -91,46 +126,125 @@ document.querySelector("#reset-timer")
         showTime();
     });
 
-durationInput.addEventListener("change", () => {
-    if (interval !== null) return;
+    durationInput.addEventListener("change", () => {
+        if (interval !== null) return;
 
-    const minutes = Number(durationInput.value);
-    if (Number.isFinite(minutes) &&
-        minutes >= 1 && minutes <= 180) {
-        remaining = minutes * 60;
-        showTime();
-    }
-});
+        const minutes = Number(durationInput.value);
 
-showTime();
+        if (Number.isFinite(minutes) && minutes >= 1 && minutes <= 180) {
+            remaining = minutes * 60;
+            showTime();
+        }
+    });
 
-
-
-
-function openWindow(element) {
-    element.style.display = "block";
-    biggestIndex++;
-    element.style.zIndex = biggestIndex;
-    element.style.top = "";
-    element.style.left = "";
+    showTime();
 }
 
-window.onload = function () {
-    openWindow(document.getElementById("welcome"));
-};
+const titleInput = document.getElementById("noteTitle");
+const contentInput = document.getElementById("noteContent");
+const saveButton = document.getElementById("saveButton");
+const notesList = document.getElementById("notesList");
 
-function closeWindow(element) {
-    element.style.display = "none";
+let notes = [];
+
+try {
+    notes = JSON.parse(localStorage.getItem("myNotes") || "[]");
+
+    if (!Array.isArray(notes)) {
+        notes = [];
+    }
+} catch {
+    notes = [];
 }
 
+let editingId = null;
 
+function saveToStorage() {
+    localStorage.setItem("myNotes", JSON.stringify(notes));
+}
 
-addWindowTapHandling(document.getElementById("settings"));
+function renderNotes() {
+    if (!notesList) return;
 
-function changeTheme(theme) {
-    if (theme === "default") {
-        document.documentElement.removeAttribute("data-theme");
-    } else {
-        document.documentElement.setAttribute("data-theme", theme);
-    }
+    notesList.replaceChildren();
+
+    notes.forEach(note => {
+        const card = document.createElement("article");
+        card.className = "note";
+
+        const title = document.createElement("h3");
+        title.textContent = note.title || "Untitled";
+
+        const content = document.createElement("p");
+        content.textContent = note.content || "";
+
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.textContent = "Edit";
+
+        editButton.addEventListener("click", () => {
+            titleInput.value = note.title || "";
+            contentInput.value = note.content || "";
+            editingId = note.id;
+            saveButton.textContent = "Update Note";
+            titleInput.focus();
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+
+        deleteButton.addEventListener("click", () => {
+            notes = notes.filter(item => item.id !== note.id);
+
+            if (editingId === note.id) {
+                editingId = null;
+                titleInput.value = "";
+                contentInput.value = "";
+                saveButton.textContent = "Save Note";
+            }
+
+            saveToStorage();
+            renderNotes();
+        });
+
+        card.append(title, content, editButton, deleteButton);
+        notesList.append(card);
+    });
+}
+
+if (titleInput && contentInput && saveButton && notesList) {
+    saveButton.addEventListener("click", () => {
+        const title = titleInput.value.trim();
+        const content = contentInput.value.trim();
+
+        if (!title && !content) {
+            alert("Write something before saving.");
+            return;
+        }
+
+        if (editingId !== null) {
+            notes = notes.map(note =>
+                note.id === editingId
+                    ? { ...note, title, content }
+                    : note
+            );
+        } else {
+            notes.unshift({
+                id: Date.now(),
+                title,
+                content
+            });
+        }
+
+        saveToStorage();
+        renderNotes();
+
+        titleInput.value = "";
+        contentInput.value = "";
+        editingId = null;
+        saveButton.textContent = "Save Note";
+    });
+
+    renderNotes();
 }
