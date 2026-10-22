@@ -353,6 +353,14 @@ textarea {
     filter: drop-shadow(0 0 12px rgba(112, 127, 150, 0.3));
 }
 
+.moon {
+    display: block;
+    width: 150px;
+    height: 150px;
+    background-color: #777;
+    border-radius: 50%;
+}
+
 .phase-name {
     color: var(--text);
     font-family: 'Times New Roman', Times, serif;
