@@ -46,7 +46,7 @@ function closeWindow(element) {
 
 
 function changeTheme(theme) {
-    const allowedThemes = ["default", "violet", "silver", "teal", "red", "brown"];
+    const allowedThemes = ["default", "violet", "silver", "teal", "red", "brown", "lightblue"];
 
     if (!allowedThemes.includes(theme)) return;
 
@@ -249,3 +249,90 @@ if (titleInput && contentInput && saveButton && notesList) {
 
     renderNotes();
 }
+
+
+
+
+
+
+
+
+
+
+function updateMoonPhase() {
+    const knownNewMoon = new Date("2000-01-06T18:14:00Z");
+    const synodicMonth = 29.5305877058;
+
+    const days = (Date.now() - knownNewMoon.getTime()) / 86400000;
+    const phase =
+        (((days % synodicMonth) + synodicMonth) % synodicMonth) / synodicMonth;
+
+    const shadow = document.getElementById("moon-shadow");
+    const label = document.getElementById("phase-name");
+    const moon = document.getElementById("moon");
+
+    if (!shadow || !label || !moon) return;
+
+    const R = 74;
+    const C = 75;
+    const cosPhase = Math.cos(2 * Math.PI * phase);
+    const waxing = phase < 0.5;
+    const rx = Math.max(0.001, Math.abs(cosPhase) * R);
+
+    let d;
+
+    if (phase < 0.0001 || phase > 0.9999) {
+
+        d = `M ${C} ${C - R}
+             A ${R} ${R} 0 1 0 ${C} ${C + R}
+             A ${R} ${R} 0 1 0 ${C} ${C - R} Z`;
+    } else if (Math.abs(phase - 0.5) < 0.0001) {
+
+        d = "";
+    } else {
+        const outerSweep = waxing ? 0 : 1;
+
+
+        const innerSweep = waxing
+            ? (cosPhase > 0 ? 0 : 1)
+            : (cosPhase > 0 ? 1 : 0);
+
+        d = `M ${C} ${C - R}
+             A ${R} ${R} 0 0 ${outerSweep} ${C} ${C + R}
+             A ${rx} ${R} 0 0 ${innerSweep} ${C} ${C - R}
+             Z`;
+    }
+
+    shadow.setAttribute("d", d);
+
+    let name;
+
+    if (phase < 0.03 || phase >= 0.97) {
+        name = "New Moon";
+    } else if (phase < 0.22) {
+        name = "Waxing Crescent";
+    } else if (phase < 0.28) {
+        name = "First Quarter";
+    } else if (phase < 0.47) {
+        name = "Waxing Gibbous";
+    } else if (phase < 0.53) {
+        name = "Full Moon";
+    } else if (phase < 0.72) {
+        name = "Waning Gibbous";
+    } else if (phase < 0.78) {
+        name = "Last Quarter";
+    } else {
+        name = "Waning Crescent";
+    }
+
+    label.textContent = name;
+    moon.setAttribute("aria-label", name);
+}
+
+updateMoonPhase();
+setInterval(updateMoonPhase, 60 * 60 * 1000);
+
+
+
+
+

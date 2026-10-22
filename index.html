@@ -58,15 +58,16 @@
             </div>
 
             <div class="window-content">
-                <p>Choose a theme:</p>
-
+                <p style="font-size: 17px;">Choose a theme:</p>
+              
+            
                 <button type="button" onclick="changeTheme('default')">Default</button>
                 <button type="button" onclick="changeTheme('violet')">Violet</button>
                 <button type="button" onclick="changeTheme('silver')">Moonlight</button>
                 <button type="button" onclick="changeTheme('teal')">Emerald</button>
                 <button type="button" onclick="changeTheme('brown')">Chocolate</button>
                 <button type="button" onclick="changeTheme('red')">Maroon</button>
-
+                
                 
             </div>
         </div>
@@ -116,12 +117,24 @@
 
     </div>
 
-    <div class="moon-con">
-        <dic class="moon" id="moon">
-            <div class="shadow" id="moon-shadow"></div>
-        </dic>
-        <div class="phase-name"></div>
-    </div>
+    
+<div class="moon-container">
+    <svg class="moon" id="moon"
+         viewBox="0 0 150 150"
+         role="img"
+         aria-label="Current Moon phase">
+        <defs>
+            <clipPath id="moon-clip">
+                <circle cx="75" cy="75" r="74"/>
+            </clipPath>
+        </defs>
+        <g clip-path="url(#moon-clip)">
+            <path id="moon-shadow" fill-opacity="0.65" fill="var(--panel)" d=""/>
+        </g>
+    </svg>
+    <div class="phase-name" id="phase-name"></div>
+</div>
+
 
 </body>
 </html>

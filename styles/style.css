@@ -12,7 +12,7 @@
     --backgroundcol: #120d20;
     --panel: #251936;
     --text: #e0d4f0;
-    --accent: #705f81;
+    --accent: rgb(154, 144, 166);
     --hover: #38254b;
 }
 
@@ -28,9 +28,9 @@
 [data-theme="teal"] {
     --background: url("../pics/wp7294211.jpg");
     --backgroundcol: #0f2429;
-    --panel: #203738;
+    --panel: #18292a;
     --text: #dcf2f1;
-    --accent: #59787b;
+    --accent: #729194;
     --hover: #2d4849;
 }
 
@@ -38,20 +38,23 @@
 [data-theme="red"] {
     --background: url("../pics/wp7294211.jpg");
     --backgroundcol: #3a0000;
-    --panel: #382020;
-    --text: #f2dcee;
-    --accent: #b07d7d;
-    --hover: #492d2d;
+    --panel: #381018;
+    --text: #f5d0d7;
+    --accent: #9f8888;
+    --hover: #4f202e;
 }
 
 [data-theme="brown"] {
     --background: url("../pics/wp7294211.jpg");
     --backgroundcol: #231209;
     --panel: #34251e;
-    --text: #f2e7dc;
-    --accent: #b0947d;
+    --text: #e9d9d2;
+    --accent: #8e7866;
     --hover: #49392d;
 }
+
+
+
 
 
 * {
@@ -313,6 +316,49 @@ textarea {
 
 .note button {
     margin: 4px 4px 0 0;
+}
+
+
+
+.moon-container {
+
+    position: fixed;
+    bottom: 5px;
+    left: 20px !important;
+
+    text-align: center;
+    width: auto;
+    padding: 20px;
+
+    z-index: 10;
+
+}
+
+.moon {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px;
+
+    background-image: url("../pics/moon.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    border-radius: 50%;
+
+    background-color: var(--accent);
+    background-blend-mode: soft-light;
+
+    filter: drop-shadow(0 0 12px rgba(112, 127, 150, 0.3));
+}
+
+.phase-name {
+    color: var(--text);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
 }
 
 
