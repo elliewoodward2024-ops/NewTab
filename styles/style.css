@@ -437,6 +437,19 @@ textarea {
         box-shadow 0.2s ease;
 }
 
+
+
+.bookmark-label {
+    max-width: 76px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    text-align: center;
+    opacity: 0;
+
+}
+
 .bookmark-link:hover .bookmark-circle,
 .add-bookmark:hover {
     transform: translateY(-4px);
@@ -444,14 +457,11 @@ textarea {
     box-shadow: 0 0 14px #707f9633;
 }
 
-.bookmark-label {
-    max-width: 76px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 13px;
-    text-align: center;
+.bookmark-link:hover .bookmark-label {
+    opacity: 1;
 }
+
+
 
 .add-bookmark {
     border-style: dashed;
