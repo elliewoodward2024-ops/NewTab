@@ -9,12 +9,7 @@ function updateLiveDate() {
     const target = document.getElementById("live-date");
     if (!target) return;
 
-    const options = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    };
+    const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
 
     target.textContent = new Date().toLocaleDateString("en-AU", options);
 }

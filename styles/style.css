@@ -492,6 +492,10 @@ textarea {
     color: var(--text);
 }
 
+#addBookmarkButton[hidden] {
+    display: none !important;
+}
+
 @media (max-width: 600px) {
     #bookmarks {
         gap: 12px;
