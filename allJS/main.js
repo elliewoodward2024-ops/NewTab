@@ -336,3 +336,173 @@ setInterval(updateMoonPhase, 60 * 60 * 1000);
 
 
 
+const bookmarkList = document.getElementById("bookmarkList");
+const addBookmarkButton = document.getElementById("addBookmarkButton");
+const bookmarkWindow = document.getElementById("bookmarkWindow");
+const bookmarkName = document.getElementById("bookmarkName");
+const bookmarkURL = document.getElementById("bookmarkURL");
+const saveBookmarkButton = document.getElementById("saveBookmarkButton");
+const closeBookmarkButton = document.getElementById("closeBookmarkButton");
+const bookmarkMessage = document.getElementById("bookmarkMessage");
+
+const MAX_BOOKMARKS = 8;
+const BOOKMARK_STORAGE_KEY = "myBookmarks";
+
+let bookmarks = [];
+
+
+try {
+    const saved = JSON.parse(
+        localStorage.getItem(BOOKMARK_STORAGE_KEY) || "[]"
+    );
+
+    if (Array.isArray(saved)) {
+        bookmarks = saved.filter(item =>
+            item &&
+            typeof item.name === "string" &&
+            typeof item.url === "string" &&
+            isValidBookmarkURL(item.url)
+        ).slice(0, MAX_BOOKMARKS);
+    }
+
+} catch {
+    bookmarks = [];
+}
+
+function isValidBookmarkURL(value) {
+    try {
+        const url = new URL(value);
+
+        return url.protocol === "https:" ||
+            url.protocol === "http:";
+    } catch {
+        return false;
+    }
+
+}
+
+function saveBookmarks() {
+    localStorage.setItem(
+        BOOKMARK_STORAGE_KEY,
+        JSON.stringify(bookmarks)
+    );
+
+}
+
+function renderBookmarks() {
+    if (!bookmarkList || !addBookmarkButton) return;
+
+    bookmarkList.replaceChildren();
+
+    bookmarks.forEach((bookmark, index) => {
+        const item = document.createElement("div");
+        item.className = "bookmark-item";
+
+        const link = document.createElement("a");
+        link.className = "bookmark-link";
+        link.href = bookmark.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.title = bookmark.url;
+
+        const circle = document.createElement("span");
+        circle.className = "bookmark-circle";
+
+        circle.textContent = bookmark.name.charAt(0).toUpperCase();
+        const label = document.createElement("span");
+        label.className = "bookmark-label";
+        label.textContent = bookmark.name;
+
+        link.append(circle, label);
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "remove-bookmark";
+        removeButton.textContent = "×";
+        removeButton.setAttribute(
+            "aria-label",
+            `Remove ${bookmark.name}`
+        );
+
+        removeButton.addEventListener("click", () => {
+            bookmarks.splice(index, 1);
+            saveBookmarks();
+            renderBookmarks();
+        });
+
+        item.append(link, removeButton);
+        bookmarkList.append(item);
+    });
+    addBookmarkButton.hidden = bookmarks.length >= MAX_BOOKMARKS;
+}
+
+
+function openBookmarkWindow() {
+
+    if (!bookmarkWindow) return;
+
+    if (bookmarks.length >= MAX_BOOKMARKS) {
+        return;
+    }
+
+    bookmarkMessage.textContent = "";
+    bookmarkName.value = "";
+    bookmarkURL.value = "";
+
+    openWindow(bookmarkWindow);
+    bookmarkName.focus();
+}
+
+if (
+    bookmarkList &&
+    addBookmarkButton &&
+    bookmarkWindow &&
+    bookmarkName &&
+    bookmarkURL &&
+    saveBookmarkButton &&
+    closeBookmarkButton &&
+    bookmarkMessage
+) {
+    addBookmarkButton.addEventListener("click", openBookmarkWindow);
+    closeBookmarkButton.addEventListener("click", () => {
+        closeWindow(bookmarkWindow);
+    });
+
+    saveBookmarkButton.addEventListener("click", () => {
+        const name = bookmarkName.value.trim();
+        const rawURL = bookmarkURL.value.trim();
+
+        if (!name || !rawURL) {
+            bookmarkMessage.textContent = "Please enter a name and website URL."
+            return;
+        }
+        if (bookmarks.length >= MAX_BOOKMARKS) {
+            bookmarkMessage.textContent =
+                "You've reached the bookmark limit.";
+            return;
+        }
+
+        if (!isValidBookmarkURL(rawURL)) {
+            bookmarkMessage.textContent =
+                "Please enter a valid HTTP or HTTPS URL.";
+            return;
+        }
+
+        const url = new URL(rawURL).href;
+
+        bookmarks.push({ name, url });
+
+        saveBookmarks();
+        renderBookmarks();
+        closeWindow(bookmarkWindow);
+    });
+
+    bookmarkURL.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            saveBookmarkButton.click();
+        }
+    });
+
+    renderBookmarks();
+}
+
+

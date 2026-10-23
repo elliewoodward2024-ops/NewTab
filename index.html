@@ -138,34 +138,37 @@
 
 
 
+
 <section id="bookmarks">
     <div id="bookmarkList"></div>
-    <button type="button" id="addBookmark" class="bookmark-circle add-bookmark" aria-label="Add a bookmark" > + </button>
+    <button type="button" id="addBookmarkButton" class="bookmark-circle add-bookmark" aria-label="Add a bookmark">
+        +
+    </button>
 </section>
 
 <div id="bookmarkWindow" class="window">
+    <div class="window-header">
+        <h1>Add Bookmark</h1>
+        <button type="button" id="closeBookmarkButton">
+            x
+        </button>
+    </div>
 
-            <div class="window-header">
-                <h1>Add Bookmark</h1>
-
-                <button type="button" id="closeBookmark">
-                    x
-                </button>
-            </div>
-
-            <div class="window-content">
-                <label for="bookmarkName">Name</label>
-
-                <input id="bookmarkName" type="text" placeholder="e.g. GitHub" maxlength="30">
+    <div class="window-content">
+        <label for="bookmarkName">Name</label>
+        <input id="bookmarkName" type="text" placeholder="e.g. GitHub" maxlength="30" >
 
         <label for="bookmarkURL">Website URL</label>
-        <input id="bookmarkURL" type="url" placeholder="https://github.com" >
+        <input id="bookmarkURL" type="url" placeholder="https://github.com"  >
 
-        <button type="button" id="saveBookmark">Save Bookmark</button> 
-        <p id="bookmarkMessage" role="status"></p>       
-
-            </div>
+        <button type="button" id="saveBookmarkButton">
+            Save Bookmark
+        </button>
+        <p id="bookmarkMessage" role="status"></p>
+    </div>
 </div>
+
+
 
 
 </body>
