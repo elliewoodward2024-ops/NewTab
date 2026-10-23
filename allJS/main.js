@@ -46,7 +46,7 @@ function closeWindow(element) {
 
 
 function changeTheme(theme) {
-    const allowedThemes = ["default", "violet", "silver", "teal", "red", "brown", "lightblue"];
+    const allowedThemes = ["default", "violet", "Navy", "teal", "red", "brown", "lightblue"];
 
     if (!allowedThemes.includes(theme)) return;
 

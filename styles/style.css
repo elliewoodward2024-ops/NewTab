@@ -1,10 +1,10 @@
 :root {
     --background: url("../pics/wp7294211.jpg");
-    --backgroundcol: #171B35;
-    --panel: #090B18;
-    --text: #dae4ff;
-    --accent: #707f96;
-    --hover: #292d49;
+    --backgroundcol: #10141c;
+    --panel: #202938;
+    --text: #dce5f2;
+    --accent: #59697b;
+    --hover: #303c4d;
 }
 
 [data-theme="violet"] {
@@ -16,13 +16,13 @@
     --hover: #38254b;
 }
 
-[data-theme="silver"] {
+[data-theme="Navy"] {
     --background: url("../pics/wp7294211.jpg");
-    --backgroundcol: #10141c;
-    --panel: #202938;
-    --text: #dce5f2;
-    --accent: #59697b;
-    --hover: #303c4d;
+    --backgroundcol: #171B35;
+    --panel: #090B18;
+    --text: #dae4ff;
+    --accent: #707f96;
+    --hover: #292d49;
 }
 
 [data-theme="teal"] {
@@ -65,8 +65,8 @@ body {
     margin: 0;
     min-height: 100vh;
     background-image: var(--background);
-    background-position: center;
-    background-size: cover;
+    background-position: -400px;
+    background-size: 1800px;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-color: var(--backgroundcol);
