@@ -496,6 +496,14 @@ textarea {
     display: none !important;
 }
 
+
+#bookmarkName:focus,
+#bookmarkURL:focus,
+#noteTitle:focus,
+#noteContent:focus {
+    outline: 1px solid var(--text);
+}
+
 @media (max-width: 600px) {
     #bookmarks {
         gap: 12px;
