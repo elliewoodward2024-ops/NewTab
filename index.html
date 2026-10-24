@@ -8,42 +8,15 @@
     <link rel="stylesheet" href="styles/style.css">
     <script src="allJS/main.js" defer></script>
 </head>
-
 <body>
-
     <div class="main-container">
         <div class="clock" id="liveClock"></div>
         <div class="date" id="live-date"></div>
 
-        <form action="https://www.google.com/search"
-              method="GET"
-              target="_blank"
-              class="TextCon">
-
-            <input id="search"
-                   type="text"
-                   name="q"
-                   class="searchBar"
-                   placeholder="Search..."
-                   required>
+        <form action="https://www.google.com/search" method="GET" target="_blank" class="TextCon">
+            <input id="search" type="text" name="q" class="searchBar" placeholder="Search..." required>
         </form>
     </div>
-
-
-
-    <!-- May add this in later - not working atm / i had the idea then decided otherwise
-    
-    <section id="focus-timer">
-        <h2>Deep Space</h2>
-        <label for="duration">Focus duration (minutes)</label>
-        <input id="duration" type="number" min="1" max="180" value="25">
-
-        <p id="timer-display">25:00</p>
-        <button id="start-timer">Start</button>
-        <button id="pause-timer">Pause</button>
-        <button id="reset-timer">Reset</button>
-    </section> -->
-
 
     <main>
 
@@ -51,26 +24,17 @@
 
             <div class="settings-header">
                 <h1>Settings</h1>
-
-                <button type="button"
-                        onclick="closeWindow(document.getElementById('settings'))"
-                        aria-label="Close settings">
-                    x
-                </button>
+                <button type="button" onclick="closeWindow(document.getElementById('settings'))" aria-label="Close settings"> x</button>
             </div>
 
             <div class="window-content">
                 <p style="font-size: 17px;">Choose a theme:</p>
-              
-            
                 <button type="button" onclick="changeTheme('default')">Default</button>
                 <button type="button" onclick="changeTheme('violet')">Violet</button>
                 <button type="button" onclick="changeTheme('Navy')">Moonlight</button>
                 <button type="button" onclick="changeTheme('teal')">Emerald</button>
                 <button type="button" onclick="changeTheme('brown')">Chocolate</button>
-                
-                
-                
+                          
             </div>
         </div>
 
@@ -79,11 +43,7 @@
             <div class="window-header">
                 <h1>Notes App</h1>
 
-                <button type="button"
-                        onclick="closeWindow(document.getElementById('notes'))"
-                        aria-label="Close notes">
-                    x
-                </button>
+                <button type="button" onclick="closeWindow(document.getElementById('notes'))" aria-label="Close notes">x</button>
             </div>
 
             <div class="window-content">
@@ -103,16 +63,12 @@
 
     <div id="desktopApps">
 
-        <button class="desktop-icon"
-                type="button"
-                onclick="openWindow(document.getElementById('settings'))">
+        <button class="desktop-icon" type="button" onclick="openWindow(document.getElementById('settings'))">
             <span class="desktop-symbol">⚙</span>
             <span>Settings</span>
         </button>
 
-        <button class="desktop-icon2"
-                type="button"
-                onclick="openWindow(document.getElementById('notes'))">
+        <button class="desktop-icon2" type="button" onclick="openWindow(document.getElementById('notes'))">
             <span class="desktop-symbol notes-symbol">≔</span>
             <span>Quick Note</span>
         </button>
@@ -138,22 +94,15 @@
 </div>
 
 
-
-
-
 <section id="bookmarks">
     <div id="bookmarkList"></div>
-    <button type="button" id="addBookmarkButton" class="bookmark-circle add-bookmark" aria-label="Add a bookmark">
-        +
-    </button>
+    <button type="button" id="addBookmarkButton" class="bookmark-circle add-bookmark" aria-label="Add a bookmark">+</button>
 </section>
 
 <div id="bookmarkWindow" class="window">
     <div class="window-header">
         <h1>Add Bookmark</h1>
-        <button type="button" id="closeBookmarkButton">
-            x
-        </button>
+        <button type="button" id="closeBookmarkButton">x</button>
     </div>
 
     <div class="window-content">
@@ -163,15 +112,22 @@
         <label for="bookmarkURL">Website URL</label>
         <input id="bookmarkURL" type="url" placeholder="https://github.com"  >
 
-        <button type="button" id="saveBookmarkButton">
-            Save Bookmark
-        </button>
+        <button type="button" id="saveBookmarkButton">Save Bookmark</button>
         <p id="bookmarkMessage" role="status"></p>
     </div>
 </div>
-
-
-
-
 </body>
 </html>
+
+  <!-- May add this in later - not working atm / i had the idea then decided otherwise
+    
+    <section id="focus-timer">
+        <h2>Deep Space</h2>
+        <label for="duration">Focus duration (minutes)</label>
+        <input id="duration" type="number" min="1" max="180" value="25">
+
+        <p id="timer-display">25:00</p>
+        <button id="start-timer">Start</button>
+        <button id="pause-timer">Pause</button>
+        <button id="reset-timer">Reset</button>
+    </section> -->

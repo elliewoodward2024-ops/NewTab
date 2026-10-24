@@ -10,6 +10,8 @@ I made a custom new tab page themed around an astronomy aesthetic.
     - Time
     - Date
 - Personalized bookmarks
+- Quick notes feature
+- Different themes
 
 
 ## Demo Link
