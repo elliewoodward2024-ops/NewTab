@@ -10,10 +10,10 @@
 [data-theme="violet"] {
     --background: url("../pics/wp7294211.jpg");
     --backgroundcol: #120d20;
-    --panel: #251936;
+    --panel: #393046;
     --text: #e0d4f0;
     --accent: rgb(154, 144, 166);
-    --hover: #38254b;
+    --hover: #3e314b;
 }
 
 [data-theme="Navy"] {
